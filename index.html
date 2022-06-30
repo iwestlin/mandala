@@ -1,5 +1,11 @@
 <html>
-  <head></head>
+  <head>
+  <style type="text/css">
+    #container {
+      background-color: bisque;
+    }
+  </style>
+  </head>
   <body>
     <a id="download">Download</a>
     <button onclick="generate()">Generate new mandala</button>
@@ -13,6 +19,8 @@
       <input type="radio" id="nocolor" name="chose" value="nocolor">
       <label for="nocolor">No color</label>
 
+      <input type="radio" id="transparent" name="chose" value="transparent">
+      <label for="transparent">Transparent</label>
     <div id="container"></div>
     <script src="main.js"></script>
   </body>

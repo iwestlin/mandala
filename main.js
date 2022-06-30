@@ -1,9 +1,16 @@
+document.getElementById('usecolor').addEventListener('change', (event) => {
+  colored = true
+})
+document.getElementById('nocolor').addEventListener('change', (event) => {
+  colored = false
+  color = 'ffffff'
+})
 var WIDTH=500,
     preheader="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n",
     header="<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\""+WIDTH+"px\" height=\""+WIDTH+"px\" viewBox=\"0 0 "+WIDTH+" "+WIDTH+"\" enable-background=\"new 0 0 "+WIDTH+" "+WIDTH+"\" xml:space=\"preserve\">\n",
     footer="</svg>",
     REP=Math.floor(Math.random()*4)+2,
-    colored=false,
+    colored=true,
     color="ffffff",
     d1=[],
     d2=[],
@@ -12,6 +19,10 @@ var WIDTH=500,
     RAD=WIDTH/2,
     container=document.getElementById("container"),
     mandala="";
+var arr = []
+var curr = -1
+var a=document.getElementById("download");
+a.download = "mandala.svg";
 
 function generate(){
     mandala=header;
@@ -77,9 +88,25 @@ function generate(){
 
     mandala+=footer;
     container.innerHTML=mandala;
-    var a=document.getElementById("download");
     a.href = window.URL.createObjectURL(new Blob([preheader+mandala], {type: 'image/svg'}));
-    a.download = "mandala.svg";
+    arr.push(mandala)
+    curr = arr.length - 1
+}
+
+function prev () {
+    if (!curr) return alert('no prev')
+    curr--
+    mandala = arr[curr]
+    container.innerHTML=mandala;
+    a.href = window.URL.createObjectURL(new Blob([preheader+mandala], {type: 'image/svg'}));
+}
+
+function next () {
+    if (curr >= arr.length - 1) return alert('no next')
+    curr++
+    mandala = arr[curr]
+    container.innerHTML=mandala;
+    a.href = window.URL.createObjectURL(new Blob([preheader+mandala], {type: 'image/svg'}));
 }
 
 function toggleColor()
